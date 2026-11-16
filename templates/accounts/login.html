@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card auth-box">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div>
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {% if form.username.errors %}<div class="errorlist">{{ form.username.errors }}</div>{% endif %}
+        </div>
+        <div>
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {% if form.password.errors %}<div class="errorlist">{{ form.password.errors }}</div>{% endif %}
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <p>Need an account? <a href="{% url 'accounts:register' %}">Register here</a>.</p>
+</div>
+{% endblock %}

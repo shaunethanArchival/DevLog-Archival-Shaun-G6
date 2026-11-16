@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, {{ user.get_full_name|default:user.username }}.</p>
+    <div class="dashboard-grid">
+        <div class="panel">
+            <h3>Account Management</h3>
+            <p>Review and manage registered users.</p>
+        </div>
+        <div class="panel">
+            <h3>Reports</h3>
+            <p>Monitor system activity and archive summaries.</p>
+        </div>
+        <div class="panel">
+            <h3>Configuration</h3>
+            <p>Adjust system settings and permissions.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
