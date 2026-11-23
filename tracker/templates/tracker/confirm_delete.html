@@ -1,0 +1,8 @@
+{% extends "tracker/base_tracker.html" %}
+{% block content %}
+<h1>Delete?</h1>
+<p>Are you sure you want to delete <strong>{{ object }}</strong>? This cannot be undone.</p>
+<form method="post">{% csrf_token %}
+  <button type="submit">Yes, delete</button> <a href="{% url back %}">Cancel</a>
+</form>
+{% endblock %}
