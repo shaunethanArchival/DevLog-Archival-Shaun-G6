@@ -1,0 +1,9 @@
+{# Include in BOTH role dashboards: {% include "tracker/_dashboard_card.html" %} #}
+<section>
+  <h2>Work Sessions</h2>
+  <p>
+    <a href="{% url 'tracker:session_create' %}">+ Log a session</a> |
+    <a href="{% url 'tracker:session_list' %}">View sessions</a> |
+    <a href="{% url 'tracker:project_list' %}">Projects</a>
+  </p>
+</section>

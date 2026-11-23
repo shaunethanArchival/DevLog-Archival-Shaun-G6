@@ -1,0 +1,25 @@
+{% extends "tracker/base_tracker.html" %}
+{% block title %}Work Sessions{% endblock %}
+{% block content %}
+<h1>Work Sessions</h1>
+<p><a href="{% url 'tracker:session_create' %}"><button>+ Log session</button></a></p>
+<form method="get">
+  <label>Project:
+    <select name="project" onchange="this.form.submit()">
+      <option value="">All</option>
+      {% for p in projects %}<option value="{{ p.pk }}" {% if selected == p.pk|stringformat:"s" %}selected{% endif %}>{{ p.name }}</option>{% endfor %}
+    </select>
+  </label>
+</form>
+<p><strong>Total:</strong> {{ total_minutes }} min ({{ total_hours }} h){% if is_admin %} &mdash; admin view: all users{% endif %}</p>
+<table>
+  <tr><th>Date</th><th>Project</th>{% if is_admin %}<th>User</th>{% endif %}<th>Minutes</th><th>Notes</th><th></th></tr>
+  {% for s in sessions %}
+  <tr>
+    <td>{{ s.session_date }}</td><td>{{ s.project.name }}</td>{% if is_admin %}<td>{{ s.user }}</td>{% endif %}<td>{{ s.duration_minutes }}</td><td>{{ s.notes }}</td>
+    <td>{% if s.user == request.user or is_admin %}<a href="{% url 'tracker:session_update' s.pk %}">Edit</a> |
+      <a href="{% url 'tracker:session_delete' s.pk %}">Delete</a>{% endif %}</td>
+  </tr>
+  {% empty %}<tr><td colspan="5">No sessions yet. Log your first one!</td></tr>{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}DevLog{% endblock %}</title>
+  <style>
+    body{font-family:system-ui,sans-serif;max-width:900px;margin:0 auto;padding:1rem;line-height:1.5}
+    nav a{margin-right:1rem} table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{border-bottom:1px solid #ddd;padding:.5rem;text-align:left}
+    .msg{padding:.6rem 1rem;border-radius:6px;margin:.5rem 0}
+    .success{background:#e6f6ea;color:#1a6b30}.error{background:#fdeaea;color:#a12626}
+    .errorlist{color:#a12626;list-style:none;padding:0;margin:.2rem 0}
+    input,select,textarea{padding:.4rem;margin:.2rem 0;max-width:100%} button{padding:.4rem .9rem;cursor:pointer}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'tracker:session_list' %}">Sessions</a>
+    <a href="{% url 'tracker:project_list' %}">Projects</a>
+    <a href="{% url 'tracker:category_list' %}">Categories</a>
+    <a href="/">Dashboard</a>
+  </nav>
+  <hr>
+  {% for m in messages %}<div class="msg {{ m.tags }}">{{ m }}</div>{% endfor %}
+  {% block content %}{% endblock %}
+</body>
+</html>
