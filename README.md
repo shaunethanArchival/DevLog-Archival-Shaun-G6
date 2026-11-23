@@ -1,6 +1,6 @@
 # DevLog Archival
 
-A Django full-stack project for the IM2 account feature.
+A Django full-stack project for DevLog, a work session tracker for creators. It includes the account feature and the core feature, work session logging.
 
 ## Tech stack
 - Django
@@ -14,6 +14,16 @@ A Django full-stack project for the IM2 account feature.
 - Role-based dashboards for admin and member
 - Profile viewing and editing
 - Protected routes using Django authentication
+
+## Core Feature: Work Session Logging
+
+Logged-in users create projects (with optional categories) and log work sessions
+with a date, duration in minutes and notes. Members see and manage only their own
+records. Admins can view and manage all sessions.
+
+- Models: Category, Project (many-to-many with Category), WorkSession (ForeignKey to User and Project)
+- Pages: /tracker/sessions/, /tracker/projects/, /tracker/categories/
+- Validation: duration must be at least 1 minute, the date cannot be in the future, project and category names must be unique per user
 
 ## Setup
 1. Create and activate a virtual environment.
