@@ -1,0 +1,17 @@
+{% extends "tracker/base_tracker.html" %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<h1>Projects</h1>
+<p><a href="{% url 'tracker:project_create' %}"><button>+ New project</button></a></p>
+<table>
+  <tr><th>Name</th><th>Status</th><th>Categories</th><th>Sessions</th><th>Minutes</th><th></th></tr>
+  {% for p in projects %}
+  <tr>
+    <td>{{ p.name }}</td><td>{{ p.status }}</td>
+    <td>{% for c in p.categories.all %}{{ c.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+    <td>{{ p.session_count }}</td><td>{{ p.minutes|default:0 }}</td>
+    <td><a href="{% url 'tracker:project_update' p.pk %}">Edit</a> | <a href="{% url 'tracker:project_delete' p.pk %}">Delete</a></td>
+  </tr>
+  {% empty %}<tr><td colspan="6">No projects yet.</td></tr>{% endfor %}
+</table>
+{% endblock %}
